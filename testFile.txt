@@ -1,0 +1,37 @@
+#comment
+
+int main() {
+	int foo;
+	foo = 0;
+	int bar;
+	bar = 0b10;
+	int hexFoo;
+	hexFoo = 0xbeef;
+	if (foo == bar) {
+		bar << 1;
+	}
+	else if (foo > bar) {
+		bar >> 1;
+	}
+	else {
+		foo = bar;
+	}
+	float* floatArray[10];
+	for (int i = 0; i < 10; i = i + 1) {
+		floatArray[i] = i * 2;
+	}
+	int i = 0;
+	while (i <= 9) {
+		if (floatArray[i] % 2 == 0) {
+			floatArray[i] = i - 1;
+			i++;
+		}
+	}
+	int a = 10;
+	foo >= a ? foo = 1 : foo = 2;
+	if (foo / a == 0) {
+		char* charArray = "literal";
+		char character = 'a';
+	}
+}
+	
