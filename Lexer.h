@@ -25,6 +25,7 @@ private:
 	Token lexPunctuator(TokenName n);
 	Token lexRelationalOperator(int length, RelationalOperator r);
 	Token lexArithmeticOperator(ArithmeticOperator a);
+	Token lexArithmeticOperator(int length, ArithmeticOperator a);
 	Token lexBitwiseOperator(int length, BitwiseOperator b);
 	Token lexConditionalOperator();
 	Token lexAssignmentOperator();

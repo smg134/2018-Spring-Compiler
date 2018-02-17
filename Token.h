@@ -51,12 +51,14 @@ enum RelationalOperator {
 	op_greaterEqual
 };
 
-enum ArithmeticOperator {
+enum ArithmeticOperator { 
 	op_add,
 	op_sub,
 	op_mul,
 	op_div,
-	op_mod
+	op_mod,
+	op_inc, //TODO: discriminate prefix/postfix
+	op_dec //TODO: discriminate prefix/postfix
 };
 
 enum BitwiseOperator {

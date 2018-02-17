@@ -98,6 +98,10 @@ const char* to_string(ArithmeticOperator a) {
 		return "div";
 	case op_mod:
 		return "mod";
+	case op_inc:
+		return "increment";
+	case op_dec:
+		return "decrement";
 	}
 }
 
@@ -152,7 +156,6 @@ static bool hasAttribute(TokenName n) {
 	switch (n) {
 	default:
 		return false;
-
 	case tok_relational_operator:
 	case tok_arithmetic_operator:
 	case tok_bitwise_operator:

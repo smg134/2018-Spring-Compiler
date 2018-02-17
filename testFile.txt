@@ -16,10 +16,14 @@ int main() {
 	else {
 		foo = bar;
 	}
+	#comment
 	float* floatArray[10];
-	for (int i = 0; i < 10; i = i + 1) {
+	for (int i = 0; i < 10; i++) {
 		floatArray[i] = i * 2;
 	}
+
+
+
 	int i = 0;
 	while (i <= 9) {
 		if (floatArray[i] % 2 == 0) {
@@ -34,4 +38,3 @@ int main() {
 		char character = 'a';
 	}
 }
-	
