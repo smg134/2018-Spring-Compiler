@@ -38,6 +38,8 @@ const char* to_string(TokenName n) {
 		return "conditional-operator";
 	case tok_assignment_operator:
 		return "assignment-operator";
+	case tok_compound_assignment_operator:
+		return "compound-assignment-operator";
 	case tok_def:
 		return "def";
 	case tok_else:
@@ -133,6 +135,22 @@ const char* to_string(LogicalOperator l) {
 	}
 }
 
+const char* to_string(CompoundAssignmentOperator c)
+{
+	switch (c) {
+	case op_addEq:
+		return "addition-assignment";
+	case op_subEq:
+		return "subtraction-assignment";
+	case op_mulEq:
+		return "multiplication-assignment";
+	case op_divEq:
+		return "division-assignment";
+	case op_modEq:
+		return "mod-assignment";
+	}
+}
+
 const char* to_string(TypeSpecifier t) {
 	switch (t) {
 	case type_bool:
@@ -192,6 +210,9 @@ Token::Token(BitwiseOperator b, Location l)
 
 Token::Token(LogicalOperator lo, Location l)
 	: name(tok_logical_operator), attr(lo), location(l) {}
+
+Token::Token(CompoundAssignmentOperator c, Location l) 
+	: name(tok_compound_assignment_operator), attr(c), location(l) {}
 
 Token::Token(long long value, Location l)
 	: Token(tok_decimal_integer, dec, value, l) {}
@@ -297,6 +318,9 @@ std::ostream& operator<<(std::ostream& os, Token t) {
 	case tok_logical_operator:
 		os << ':' << to_string(t.getLogicalOperator());
 		break;
+	case tok_compound_assignment_operator:
+		os << ':' << to_string(t.getCompoundAssignmentOperator());
+		break;
 	case tok_identifier:
 		os << ':' << *t.getIdentifier();
 		break;
@@ -356,6 +380,11 @@ BitwiseOperator Token::getBitwiseOperator() const {
 LogicalOperator Token::getLogicalOperator() const {
 	assert(name == tok_logical_operator);
 	return attr.logOp;
+}
+
+CompoundAssignmentOperator Token::getCompoundAssignmentOperator() const {
+	assert(name == tok_compound_assignment_operator);
+	return attr.compOp;
 }
 
 long long Token::getInteger() const {

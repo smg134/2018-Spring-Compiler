@@ -29,6 +29,7 @@ private:
 	Token lexBitwiseOperator(int length, BitwiseOperator b);
 	Token lexConditionalOperator();
 	Token lexAssignmentOperator();
+	Token lexCompoundAssignmentOperator(int length, CompoundAssignmentOperator c);
 	Token lexWord();
 	Token lexNumber();
 	Token lexBinNumber();

@@ -37,4 +37,13 @@ int main() {
 		char* charArray = "literal";
 		char character = 'a';
 	}
+	float alpha = 0;
+	float beta = 2;
+	alpha += beta;
+	alpha *= beta;
+	alpha -= beta;
+	alpha /= beta;
+	if (alpha < beta) {
+		alpha--;
+	}
 }

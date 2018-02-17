@@ -18,10 +18,11 @@ enum TokenName {
 	//Ops
 	tok_relational_operator,
 	tok_arithmetic_operator,
-	tok_bitwise_operator,
 	tok_logical_operator,
+	tok_bitwise_operator,
 	tok_conditional_operator,
 	tok_assignment_operator,
+	tok_compound_assignment_operator,
 	//Keyword
 	tok_def,
 	tok_else,
@@ -76,6 +77,14 @@ enum LogicalOperator {
 	op_logicNot
 };
 
+enum CompoundAssignmentOperator {
+	op_addEq,
+	op_subEq,
+	op_mulEq,
+	op_divEq,
+	op_modEq
+};
+
 enum TypeSpecifier {
 	type_char,
 	type_bool,
@@ -87,6 +96,7 @@ const char* to_string(RelationalOperator op);
 const char* to_string(ArithmeticOperator op);
 const char* to_string(BitwiseOperator op);
 const char* to_string(LogicalOperator op);
+const char* to_string(CompoundAssignmentOperator op);
 const char* to_string(TypeSpecifier ts);
 
 enum Radix {
@@ -118,6 +128,8 @@ union TokenAttribute {
 		: bitOp(op) {}
 	TokenAttribute(LogicalOperator op)
 		: logOp(op) {}
+	TokenAttribute(CompoundAssignmentOperator op)
+		: compOp(op) {}
 	TokenAttribute(IntegerAttribute i)
 		: intValue(i) {}
 	TokenAttribute(double d)
@@ -136,6 +148,7 @@ union TokenAttribute {
 	ArithmeticOperator arithOp;
 	BitwiseOperator bitOp;
 	LogicalOperator logOp;
+	CompoundAssignmentOperator compOp;
 	IntegerAttribute intValue;
 	double floatValue;
 	bool boolValue;
@@ -154,6 +167,7 @@ public:
 	Token(ArithmeticOperator op, Location l = {});
 	Token(BitwiseOperator op, Location l = {});
 	Token(LogicalOperator op, Location l = {});
+	Token(CompoundAssignmentOperator op, Location l = {});
 	Token(long long value, Location l = {});
 	Token(Radix r, long long value, Location l = {});
 	Token(TokenName n, Radix r, long long value, Location l = {});
@@ -177,6 +191,7 @@ public:
 	ArithmeticOperator getArithmeticOperator() const;
 	BitwiseOperator getBitwiseOperator() const;
 	LogicalOperator getLogicalOperator() const;
+	CompoundAssignmentOperator getCompoundAssignmentOperator() const;
 	long long getInteger() const;
 	double getFloatingPoint() const;
 	Radix getRadix() const;
