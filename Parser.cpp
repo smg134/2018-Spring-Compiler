@@ -79,3 +79,49 @@ Token Parser::matchShift() {
 	}
 	return {};
 }
+
+Token Parser::matchAdditive() {
+	if (lookahead() == tok_arithmetic_operator) {
+		switch (peek().getArithmeticOperator()) {
+		default:
+			return {};
+		case op_add:
+		case op_sub:
+			return accept();
+		}
+	}
+	return {};
+}
+
+Token Parser::matchMultiplicative() {
+	if (lookahead() == tok_arithmetic_operator) {
+		switch (peek().getArithmeticOperator()) {
+		default:
+			return {};
+		case op_mul:
+		case op_div:
+		case op_mod:
+			return accept();
+		}
+	}
+	return {};
+}
+
+Token Parser::accept() {
+	Token token = peek();
+	tok.pop_front();
+	if (tok.empty()) {
+		fetch();
+	}
+	return token;
+}
+
+Token Parser::peek() {
+	assert(!tok.empty());
+	return tok.front();
+}
+
+void Parser::fetch() {
+	tok.push_back(lex());
+}
+
