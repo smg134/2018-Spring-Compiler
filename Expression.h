@@ -1,12 +1,11 @@
 #pragma once
 #include "Token.h"
+#include "Type.h"
 
 //I started off with what I remembered from your Theory of Programming Languages class
 //with expressions that went in our AST last semester. Then I realized that the specification
 //in the actual assignment had a bunch of different types of expressions, so I just commented
 //all this out. I'm not sure if I have the new expression correct, though.
-
-//I see now that I skipped the "Types" section of the specification.. maybe doing that first will help.
 
 //class NumericExpression;
 //class BooleanExpression;
@@ -104,20 +103,48 @@
 //	NumericExpression* right;
 //};
 
-class PrimaryExpression {
+enum ExpressionType {
+	primary,
+	postfix,
+	unary,
+	cast,
+	multiplicative,
+	additive,
+	shift,
+	relational,
+	equality,
+	bitwiseAnd,
+	bitwiseXor,
+	bitwiseOr,
+	logicalAnd,
+	logicalOr,
+	conditional,
+	assignment
+};
+
+class Expression {
+public:
+	Expression(ExpressionType t)
+		: type(t) {}
+
+private:
+	ExpressionType type;
+};
+
+class PrimaryExpression : Expression {
 public:
 	PrimaryExpression(Token tok)
-		: tok(tok) {}
-	PrimaryExpression(PrimaryExpression* expr)
-		: subExpr(expr) {}
+		: Expression(primary), tok(tok) {}
+	PrimaryExpression(Expression* expr)
+		: Expression(primary), subExpr(expr) {}
 
 private:
 	Token tok;
-	PrimaryExpression* subExpr;
+	Expression* subExpr;
 };
 
-//TODO: postfix expression
-class PostfixExpression {};
+//TODO: figure out postfix expression
+class PostfixExpression : Expression {};
 
 enum UnaryOperator {
 	plus,
@@ -128,28 +155,46 @@ enum UnaryOperator {
 	asterisk
 };
 
-class UnaryExpression {
+class UnaryExpression : Expression {
 public:
 	UnaryExpression(UnaryOperator op, UnaryExpression* operand)
-		: op(op), operand(operand) {}
+		: Expression(unary), op(op), operand(operand) {}
 	UnaryExpression(PostfixExpression* operand)
-		: postfixOperand(operand) {}
+		: Expression(unary), postfixOperand(operand) {}
 private:
 	UnaryOperator op;
 	UnaryExpression* operand;
 	PostfixExpression* postfixOperand;
 };
 
-enum CastType {
-	int_t,
-	bool_t,
-	//TODO: add more types
-};
-
-class CastExpression {
+class CastExpression : Expression {
 public:
+	CastExpression(Type t)
+		: Expression(cast), type(t) {}
 
 private:
-	CastType type;
+	Type type;
 	UnaryExpression* expr;
 };
+
+enum MultiplicativeOperator {
+	mul_op,
+	div_op,
+	mod_op
+};
+
+class MultiplicativeExpression : Expression {
+public:
+	MultiplicativeExpression(MultiplicativeOperator op, MultiplicativeExpression* left, CastExpression* right)
+		: Expression(multiplicative), op(op), left(left), right(right) {}
+	MultiplicativeExpression(CastExpression* c)
+		: Expression(multiplicative), content(c) {}
+
+private:
+	MultiplicativeOperator op;
+	MultiplicativeExpression* left;
+	CastExpression* right;
+
+	CastExpression* content;
+};
+
