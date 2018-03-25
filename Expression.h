@@ -1,6 +1,13 @@
 #pragma once
 #include "Token.h"
 
+//I started off with what I remembered from your Theory of Programming Languages class
+//with expressions that went in our AST last semester. Then I realized that the specification
+//in the actual assignment had a bunch of different types of expressions, so I just commented
+//all this out. I'm not sure if I have the new expression correct, though.
+
+//I see now that I skipped the "Types" section of the specification.. maybe doing that first will help.
+
 //class NumericExpression;
 //class BooleanExpression;
 //
@@ -96,3 +103,53 @@
 //	NumericExpression* left;
 //	NumericExpression* right;
 //};
+
+class PrimaryExpression {
+public:
+	PrimaryExpression(Token tok)
+		: tok(tok) {}
+	PrimaryExpression(PrimaryExpression* expr)
+		: subExpr(expr) {}
+
+private:
+	Token tok;
+	PrimaryExpression* subExpr;
+};
+
+//TODO: postfix expression
+class PostfixExpression {};
+
+enum UnaryOperator {
+	plus,
+	minus,
+	tilde,
+	exclamation,
+	ampersand,
+	asterisk
+};
+
+class UnaryExpression {
+public:
+	UnaryExpression(UnaryOperator op, UnaryExpression* operand)
+		: op(op), operand(operand) {}
+	UnaryExpression(PostfixExpression* operand)
+		: postfixOperand(operand) {}
+private:
+	UnaryOperator op;
+	UnaryExpression* operand;
+	PostfixExpression* postfixOperand;
+};
+
+enum CastType {
+	int_t,
+	bool_t,
+	//TODO: add more types
+};
+
+class CastExpression {
+public:
+
+private:
+	CastType type;
+	UnaryExpression* expr;
+};
