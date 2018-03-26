@@ -131,63 +131,78 @@ Parser::Parser(SymbolTable& symbols, const File& file)
 }
 
 void Parser::parseExpr() {
-	return parseAssignmentExpr();
+	parseAssignmentExpr();
 }
 
 void Parser::parseAssignmentExpr() {
-	return parseConditionalExpr();
+	parseConditionalExpr();
 }
 
 void Parser::parseConditionalExpr() {
-	return parseLogicalOrExpr();
+	parseLogicalOrExpr();
 }
 
 void Parser::parseLogicalOrExpr() {
-	return parseLogicalAndExpr();
+	parseLogicalAndExpr();
 }
 
 void Parser::parseLogicalAndExpr() {
-	return parseBitwiseOrExpr();
+	parseBitwiseOrExpr();
 }
 
 void Parser::parseBitwiseOrExpr() {
-	return parseBitwiseAndExpr();
+	parseBitwiseAndExpr();
 }
 
 void Parser::parseBitwiseAndExpr() {
-	return parseEqualityExpr();
+	parseEqualityExpr();
 }
 
 void Parser::parseEqualityExpr() {
-	return parseRelationalExpr();
+	parseRelationalExpr();
+	while (matchEquality()) {
+		parseRelationalExpr();
+	}
 }
 
 void Parser::parseRelationalExpr() {
-	return parseShiftExpr();
+	parseShiftExpr();
+	while (matchRelational()) {
+		parseShiftExpr();
+	}
 }
 
 void Parser::parseShiftExpr() {
-	return parseAdditiveExpr();
+	parseAdditiveExpr();
+	while (matchShift()) {
+		parseAdditiveExpr();
+	}
 }
 
 void Parser::parseAdditiveExpr() {
-	return parseMultiplicativeExpr();
+	parseMultiplicativeExpr();
+	while (matchAdditive()) {
+		parseMultiplicativeExpr();
+	}
 }
 
 void Parser::parseMultiplicativeExpr() {
-	return parseCastExpr();
+	parseCastExpr();
+	while (matchMultiplicative()) {
+		return parseCastExpr();
+	}
 }
 
 void Parser::parseCastExpr() {
-	return parseUnaryExpr();
+	parseUnaryExpr();
 }
 
 void Parser::parseUnaryExpr() {
-	return parsePostfixExpr();
+	parsePostfixExpr();
 }
 
 void Parser::parsePostfixExpr() {
-	return parsePrimaryExpr();
+	parsePrimaryExpr();
 }
 
 void Parser::parsePrimaryExpr() {
@@ -217,44 +232,68 @@ void Parser::parsePrimaryExpr() {
 	throw std::runtime_error("Expected primary expression");
 }
 
-void Parser::parseStatement()
-{
+void Parser::parseStatement() {
+	//TODO: this
 }
 
-void Parser::parseDeclaration()
-{
+void Parser::parseDeclaration() {
+	switch (lookahead()) {
+	default:
+		throw std::runtime_error("Expected declaration");
+	case key_def: {
+		TokenName name = lookahead();
+		std::cout << to_string(name) << '\n';
+		if (name == tok_colon) {
+			return parseObjectDef();
+		}
+		if (name == tok_left_paren) {
+			return parseFunctionDef();
+		}
+		throw std::runtime_error("Improper declaration");
+	}
+	case key_let:
+	case key_var:
+		return parseObjectDef();
+	}
 }
 
-void Parser::parseLocalDeclaration()
-{
+void Parser::parseLocalDeclaration() {
+	return parseObjectDef();
 }
 
-void Parser::parseObjectDef()
-{
+void Parser::parseObjectDef() {
+	switch (lookahead()) {
+	default:
+		throw std::runtime_error("Expected object definition");
+	case key_def:
+		return parseValueDef();
+	case key_let:
+		return parseConstantDef();
+	case key_var:
+		return parseVariableDef();
+	}
 }
 
-void Parser::parseVariableDef()
-{
+void Parser::parseVariableDef() {
+	//TODO: this
 }
 
-void Parser::parseConstantDef()
-{
+void Parser::parseConstantDef() {
+	//TODO: this
 }
 
-void Parser::parseValueDef()
-{
+void Parser::parseValueDef() {
+	//TODO: this
 }
 
-void Parser::parseFunctionDef()
-{
+void Parser::parseFunctionDef() {
+	//TODO: this
 }
 
-void Parser::parseDeclarationSequence()
-{
+void Parser::parseDeclarationSequence() {
+	//TODO: this
 }
 
-void Parser::parseProgram()
-{
+void Parser::parseProgram() {
+	//TODO: this
 }
-
-

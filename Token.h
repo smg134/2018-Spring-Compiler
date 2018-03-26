@@ -24,11 +24,11 @@ enum TokenName {
 	tok_assignment_operator,
 	tok_compound_assignment_operator,
 	//Keyword
-	tok_def,
-	tok_else,
-	tok_if,
-	tok_let,
-	tok_var,
+	key_def,
+	key_else,
+	key_if,
+	key_let,
+	key_var,
 	//Identifier
 	tok_identifier,
 	tok_binary_integer,
