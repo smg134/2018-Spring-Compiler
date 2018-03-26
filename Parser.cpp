@@ -130,6 +130,10 @@ Parser::Parser(SymbolTable& symbols, const File& file)
 	fetch();
 }
 
+void Parser::parseType() {
+	//TODO: this
+}
+
 void Parser::parseExpr() {
 	parseAssignmentExpr();
 }
