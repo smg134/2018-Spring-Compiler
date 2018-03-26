@@ -30,8 +30,8 @@ private:
 
 class ReferenceExpression : Expression {
 public:
-	//TODO: declaration
-
+	ReferenceExpression(Type* t, Declaration* d)
+		: Expression(t), reference(d) {}
 private:
-	//TODO: declaration
+	Declaration* reference;
 };
