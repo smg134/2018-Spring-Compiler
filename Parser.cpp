@@ -125,3 +125,136 @@ void Parser::fetch() {
 	tok.push_back(lex());
 }
 
+Parser::Parser(SymbolTable& symbols, const File& file)
+	: lex(symbols, file), tok() {
+	fetch();
+}
+
+void Parser::parseExpr() {
+	return parseAssignmentExpr();
+}
+
+void Parser::parseAssignmentExpr() {
+	return parseConditionalExpr();
+}
+
+void Parser::parseConditionalExpr() {
+	return parseLogicalOrExpr();
+}
+
+void Parser::parseLogicalOrExpr() {
+	return parseLogicalAndExpr();
+}
+
+void Parser::parseLogicalAndExpr() {
+	return parseBitwiseOrExpr();
+}
+
+void Parser::parseBitwiseOrExpr() {
+	return parseBitwiseAndExpr();
+}
+
+void Parser::parseBitwiseAndExpr() {
+	return parseEqualityExpr();
+}
+
+void Parser::parseEqualityExpr() {
+	return parseRelationalExpr();
+}
+
+void Parser::parseRelationalExpr() {
+	return parseShiftExpr();
+}
+
+void Parser::parseShiftExpr() {
+	return parseAdditiveExpr();
+}
+
+void Parser::parseAdditiveExpr() {
+	return parseMultiplicativeExpr();
+}
+
+void Parser::parseMultiplicativeExpr() {
+	return parseCastExpr();
+}
+
+void Parser::parseCastExpr() {
+	return parseUnaryExpr();
+}
+
+void Parser::parseUnaryExpr() {
+	return parsePostfixExpr();
+}
+
+void Parser::parsePostfixExpr() {
+	return parsePrimaryExpr();
+}
+
+void Parser::parsePrimaryExpr() {
+	switch (lookahead()) {
+	case tok_binary_integer:
+	case tok_decimal_integer:
+	case tok_hexadecimal_integer:
+	case tok_boolean:
+	case tok_floating_point:
+	case tok_character:
+	case tok_string:
+	case tok_identifier:
+		accept();
+		return;
+
+	case tok_left_paren: {
+		match(tok_left_paren);
+		parseExpr();
+		match(tok_right_paren);
+		return;
+	}
+
+	default:
+		break;
+	}
+
+	throw std::runtime_error("Expected primary expression");
+}
+
+void Parser::parseStatement()
+{
+}
+
+void Parser::parseDeclaration()
+{
+}
+
+void Parser::parseLocalDeclaration()
+{
+}
+
+void Parser::parseObjectDef()
+{
+}
+
+void Parser::parseVariableDef()
+{
+}
+
+void Parser::parseConstantDef()
+{
+}
+
+void Parser::parseValueDef()
+{
+}
+
+void Parser::parseFunctionDef()
+{
+}
+
+void Parser::parseDeclarationSequence()
+{
+}
+
+void Parser::parseProgram()
+{
+}
+
+
