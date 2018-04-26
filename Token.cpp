@@ -38,18 +38,30 @@ const char* to_string(TokenName n) {
 		return "conditional-operator";
 	case tok_assignment_operator:
 		return "assignment-operator";
+	case tok_arrow_operator:
+		return "arrow-operator";
 	case tok_compound_assignment_operator:
 		return "compound-assignment-operator";
-	case tok_def:
+	case kw_as:
+		return "as";
+	case kw_break:
+		return "break";
+	case kw_continue:
+		return "continue";
+	case kw_def:
 		return "def";
-	case tok_else:
+	case kw_else:
 		return "else";
-	case tok_if:
+	case kw_if:
 		return "if";
-	case tok_let:
+	case kw_let:
 		return "let";
-	case tok_var:
+	case kw_var:
 		return "var";
+	case kw_return:
+		return "return";
+	case kw_while:
+		return "while";
 	case tok_identifier:
 		return "identifier";
 	case tok_binary_integer:

@@ -22,13 +22,19 @@ enum TokenName {
 	tok_bitwise_operator,
 	tok_conditional_operator,
 	tok_assignment_operator,
+	tok_arrow_operator,
 	tok_compound_assignment_operator,
 	//Keyword
-	key_def,
-	key_else,
-	key_if,
-	key_let,
-	key_var,
+	kw_as,
+	kw_break,
+	kw_continue,
+	kw_def,
+	kw_else,
+	kw_if,
+	kw_let,
+	kw_var,
+	kw_return,
+	kw_while,
 	//Identifier
 	tok_identifier,
 	tok_binary_integer,
@@ -75,6 +81,11 @@ enum LogicalOperator {
 	op_logicAnd,
 	op_logicOr,
 	op_logicNot
+};
+
+enum PointerOperator {
+	op_address,
+	op_dereference
 };
 
 enum CompoundAssignmentOperator {
@@ -183,6 +194,7 @@ public:
 	TokenAttribute getAttribute() const { return attr; }
 	Location getLocation() const { return location; }
 
+	bool isIdentifier() const { return name == tok_identifier; }
 	bool isInteger() const;
 	bool isFloatingPoint() const;
 
