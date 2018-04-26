@@ -28,6 +28,7 @@ private:
 	Token lexArithmeticOperator(int length, ArithmeticOperator a);
 	Token lexBitwiseOperator(int length, BitwiseOperator b);
 	Token lexConditionalOperator();
+	Token lexArrowOperator();
 	Token lexAssignmentOperator();
 	Token lexCompoundAssignmentOperator(int length, CompoundAssignmentOperator c);
 	Token lexWord();
