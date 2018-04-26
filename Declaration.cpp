@@ -3,8 +3,6 @@
 #include "Declaration.h"
 #include "Type.h"
 
-#include <iostream>
-
 bool ObjectDeclaration::isReference() const {
 	return getType()->isReference();
 }
