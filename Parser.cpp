@@ -196,7 +196,7 @@ Type* Parser::parseBasicType() {
 }
 
 Expression* Parser::parseExpr() {
-	parseAssignmentExpr();
+	return parseAssignmentExpr();
 }
 
 Expression* Parser::parseAssignmentExpr() {
@@ -393,7 +393,7 @@ Expression* Parser::parsePrimaryExpr() {
 	case tok_character:
 	case tok_string:
 		//todo
-		return;
+		return {};
 	case tok_identifier:
 		return action.onIdExpression(accept());
 	case tok_left_paren: {
@@ -539,7 +539,7 @@ Declaration* Parser::parseDeclaration() {
 	default:
 		throw std::runtime_error("Expected declaration");
 	case kw_def: {
-		TokenName name = lookahead();
+		TokenName name = lookahead(2);
 		std::cout << to_string(name) << '\n';
 		if (name == tok_colon) {
 			return parseObjectDefinition();
