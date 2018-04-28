@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "File.h"
 #include "Lexer.h"
-#include <iostream>
+#include "Parser.h"
 
 int main()
 {
 	File input("testFile.txt");
 	SymbolTable syms;
-	Lexer lex(syms, input);
-	while (Token tok = lex())
-		std::cout << tok << '\n';
+	Parser p(syms, input);
+	Declaration* d = p.parseProgram();
 }
