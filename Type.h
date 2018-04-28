@@ -74,8 +74,8 @@ struct PointerType : Type {
 };
 
 struct ReferenceType : Type {
-	ReferenceType()
-		: Type(reference_kind) {}
+	ReferenceType(Type* t)
+		: Type(reference_kind), element(t) {}
 
 	Type* getObjectType() const { return element; }
 
