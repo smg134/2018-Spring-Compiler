@@ -1,48 +1,85 @@
 #pragma once
 #include "Lexer.h"
+#include "Semantics.h"
+
 #include <deque>
+#include <vector>
+
+class Type;
+class Expression;
+class Statement;
+class Declaration;
+class Program;
+
+using TypeList = std::vector<Type*>;
+using ExpressionList = std::vector<Expression*>;
+using StatementList = std::vector<Statement*>;
+using DeclarationList = std::vector<Declaration*>;
 
 class Parser {
 public:
 	Parser(SymbolTable& symbols, const File& file);
 
-	void parseType();
+	Type* parseType();
+	Type* parseBasicType();
 
-	void parseExpr();
-	void parseAssignmentExpr();
-	void parseConditionalExpr();
-	void parseLogicalOrExpr();
-	void parseLogicalAndExpr();
-	void parseBitwiseOrExpr();
-	void parseBitwiseAndExpr();
-	void parseEqualityExpr();
-	void parseRelationalExpr();
-	void parseShiftExpr();
-	void parseAdditiveExpr();
-	void parseMultiplicativeExpr();
-	void parseCastExpr();
-	void parseUnaryExpr();
-	void parsePostfixExpr();
-	void parsePrimaryExpr();
+	Expression* parseExpr();
+	Expression* parseAssignmentExpr();
+	Expression* parseConditionalExpr();
+	Expression* parseLogicalOrExpr();
+	Expression* parseLogicalAndExpr();
+	Expression* parseBitwiseOrExpr();
+	Expression* parseBitwiseXOrExpr();
+	Expression* parseBitwiseAndExpr();
+	Expression* parseEqualityExpr();
+	Expression* parseRelationalExpr();
+	Expression* parseShiftExpr();
+	Expression* parseAdditiveExpr();
+	Expression* parseMultiplicativeExpr();
+	Expression* parseCastExpr();
+	Expression* parseUnaryExpr();
+	Expression* parsePostfixExpr();
+	Expression* parsePrimaryExpr();
 
-	void parseStatement();
+	ExpressionList parseArgumentList();
 
-	void parseDeclaration();
-	void parseLocalDeclaration();
-	void parseObjectDef();
-	void parseVariableDef();
-	void parseConstantDef();
-	void parseValueDef();
-	void parseFunctionDef();
-	void parseDeclarationSequence();
+	Statement* parseStatement();
+	Statement* parseBlockStatement();
+	Statement* parseIfStatement();
+	Statement* parseWhileStatement();
+	Statement* parseBreakStatement();
+	Statement* parseContinueStatement();
+	Statement* parseReturnStatement();
+	Statement* parseDeclarationStatement();
+	Statement* parseExpressionStatement();
+	
+	StatementList parseStatementSequence();
 
-	void parseProgram();
+	Declaration* parseDeclaration();
+	Declaration* parseLocalDeclaration();
+	Declaration* parseObjectDefinition();
+	Declaration* parseVariableDefinition();
+	Declaration* parseConstantDefinition();
+	Declaration* parseValueDefinition();
+	Declaration* parseFunctionDefinition();
+	Declaration* parseParameter();
+
+	DeclarationList parseParameterList();
+	DeclarationList parseParameterClause();
+	DeclarationList parseDeclarationSequence();
+
+	Declaration* parseProgram();
 
 private:
 	TokenName lookahead();
 	TokenName lookahead(int n);
 	Token match(TokenName name);
 	Token matchIf(TokenName name);
+	Token matchLogicalOr();
+	Token matchLogicalAnd();
+	Token matchBitwiseOr();
+	Token matchBitwiseXOr();
+	Token matchBitwiseAnd();
 	Token matchEquality();
 	Token matchRelational();
 	Token matchShift();
@@ -56,4 +93,6 @@ private:
 	Lexer lex;
 
 	std::deque<Token> tok;
+
+	Semantics action;
 };
