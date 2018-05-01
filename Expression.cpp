@@ -1,4 +1,4 @@
-#pragma once
+#include "stdafx.h"
 #include "Expression.h"
 #include "Type.h"
 

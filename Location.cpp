@@ -1,4 +1,4 @@
-#pragma once
+#include "stdafx.h"
 #include "Location.h"
 #include "File.h"
 #include <iostream>
