@@ -2,6 +2,15 @@
 #include "stdafx.h"
 #include "Declaration.h"
 #include "Type.h"
+#include "Debug.h"
+
+#include <iostream>
+
+void Declaration::debug() const {
+	DebugPrinter d(std::cerr);
+	::debug(d, this);
+}
+
 
 bool ObjectDeclaration::isReference() const {
 	return getType()->isReference();

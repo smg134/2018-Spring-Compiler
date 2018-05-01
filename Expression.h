@@ -176,8 +176,8 @@ struct CastExpression : Expression {
 	Type* destination;
 };
 
-struct AssignExpression : Expression {
-	AssignExpression(Type* t, Expression* e1, Expression* e2)
+struct AssignmentExpression : Expression {
+	AssignmentExpression(Type* t, Expression* e1, Expression* e2)
 		: Expression(assign_kind), lhs(e1), rhs(e2) {}
 
 	Expression* getLHS() const { return lhs; }
@@ -206,7 +206,7 @@ enum Conversion {
 	conv_bool, // T to bool
 	conv_char, // int to char
 	conv_int, // T to int
-	cont_ext, // int to float
+	conv_ext, // int to float
 	conv_trunc // float to int
 };
 

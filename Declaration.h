@@ -32,6 +32,8 @@ public:
 	
 	Symbol getName() const { return name; }
 
+	void debug() const;
+
 private:
 	Kind kind;
 	Symbol name;

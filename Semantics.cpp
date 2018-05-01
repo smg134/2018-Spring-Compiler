@@ -208,6 +208,7 @@ Expression* Semantics::onUnaryExpression(Token t, Expression* e) {
 	case uo_addr:
 	case uo_deref:
 		//todo
+		break;
 	}
 	return new UnopExpression(u, e);
 }
@@ -237,6 +238,7 @@ Expression* Semantics::onCallExpression(Expression* e, const ExpressionList& arg
 
 Expression* Semantics::onIndexExpression(Expression* e, const ExpressionList& args) {
 	//todo
+	return {};
 }
 
 Expression* Semantics::onIdExpression(Token t) {

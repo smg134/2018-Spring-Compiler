@@ -1,11 +1,10 @@
+#pragma once
 #include "stdafx.h"
 #include "Debug.h"
 #include "Type.h"
 #include "Expression.h"
 #include "Statement.h"
 #include "Declaration.h"
-
-#include <iostream>
 
 struct NodeFont {
 	NodeFont(const char* c)
@@ -31,7 +30,7 @@ std::ostream& operator<<(std::ostream& os, AddressFont font) {
 
 static void debugNode(DebugPrinter& d, const char* node, const void* pointer) {
 	std::string tab(d.nesting() * 2, ' ');
-	d.getStream << tab << NodeFont(node) << ' ' << AddressFont(pointer) << '\n';
+	d.getStream() << tab << NodeFont(node) << ' ' << AddressFont(pointer) << '\n';
 }
 
 static const char* getNodeName(const Type* t) {
@@ -214,16 +213,16 @@ void debug(DebugPrinter& d, const Declaration* dc) {
 	debugNode(d, getNodeName(dc), dc);
 	switch (dc->getKind()) {
 	case Declaration::program_kind:
-		return debugDeclaration(dp, static_cast<const ProgramDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const ProgramDeclaration*>(dc));
 	case Declaration::variable_kind:
-		return debugDeclaration(dp, static_cast<const VariableDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const VariableDeclaration*>(dc));
 	case Declaration::constant_kind:
-		return debugDeclaration(dp, static_cast<const ConstantDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const ConstantDeclaration*>(dc));
 	case Declaration::value_kind:
-		return debugDeclaration(dp, static_cast<const ValueDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const ValueDeclaration*>(dc));
 	case Declaration::parameter_kind:
-		return debugDeclaration(dp, static_cast<const ParameterDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const ParameterDeclaration*>(dc));
 	case Declaration::function_kind:
-		return debugDeclaration(dp, static_cast<const FunctionDeclaration*>(dc));
+		return debugDeclaration(d, static_cast<const FunctionDeclaration*>(dc));
 	}
 }
