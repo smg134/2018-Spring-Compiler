@@ -1,49 +1,25 @@
-#comment
+# test for primality of a positive integer
 
-int main() {
-	int foo;
-	foo = 0;
-	int bar;
-	bar = 0b10;
-	int hexFoo;
-	hexFoo = 0xbeef;
-	if (foo == bar) {
-		bar << 1;
-	}
-	else if (foo > bar) {
-		bar >> 1;
-	}
-	else {
-		foo = bar;
-	}
-	#comment
-	float* floatArray[10];
-	for (int i = 0; i < 10; i++) {
-		floatArray[i] = i * 2;
-	}
-
-
-
-	int i = 0;
-	while (i <= 9) {
-		if (floatArray[i] % 2 == 0) {
-			floatArray[i] = i - 1;
-			i++;
+def testPrime(num : int) -> bool {
+	def i : int = 2;
+	
+	while (i < num / 2) {
+		def val : int = num % i;
+		if (val == 0) {
+			return true;
+		}
+		else { 
+			def i : int = i + 1;
 		}
 	}
-	int a = 10;
-	foo >= a ? foo = 1 : foo = 2;
-	if (foo / a == 0) {
-		char* charArray = "literal";
-		char character = 'a';
-	}
-	float alpha = 0;
-	float beta = 2;
-	alpha += beta;
-	alpha *= beta;
-	alpha -= beta;
-	alpha /= beta;
-	if (alpha < beta) {
-		alpha--;
-	}
+	
+	return false;
+}
+
+def f() -> bool {
+	def input : int = 10;
+	
+	def isPrime : bool = testPrime(input);
+	
+	return isPrime;
 }
