@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "Semantics.h"
 #include "Type.h"
 #include "Expression.h"

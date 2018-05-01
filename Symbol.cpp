@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "Symbol.h"
 
 Symbol SymbolTable::get(const char* str) {

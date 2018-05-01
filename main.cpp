@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "File.h"
 #include "Lexer.h"
 #include "Parser.h"

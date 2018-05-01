@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "File.h"
 #include <iterator>
 #include <fstream>

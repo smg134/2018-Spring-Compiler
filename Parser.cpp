@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "Parser.h"
 #include <iostream>
 #include <sstream>
