@@ -8,5 +8,6 @@ int main() {
 	File input("testFile.txt");
 	SymbolTable syms;
 	Parser p(syms, input);
-	Declaration* d = p.parseProgram();	
+	Declaration* d = p.parseProgram();
+	d->debug();
 }

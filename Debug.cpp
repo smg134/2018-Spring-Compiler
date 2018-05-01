@@ -13,7 +13,7 @@ struct NodeFont {
 };
 
 std::ostream& operator<<(std::ostream& os, NodeFont font) {
-	return os << "\033[1;30m" << font.name << "\033[0m";
+	return os << font.name;
 }
 
 struct AddressFont {
@@ -24,7 +24,7 @@ struct AddressFont {
 };
 
 std::ostream& operator<<(std::ostream& os, AddressFont font) {
-	return os << "\033[32m" << font.pointer << "\033[0m";
+	return os << font.pointer;
 }
 
 static void debugNode(DebugPrinter& d, const char* node, const void* pointer) {

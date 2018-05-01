@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Token.h"
 #include <cassert>
-#include <iostream>
 #include <iomanip>
 
 const char* to_string(TokenName n) {

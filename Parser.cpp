@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Parser.h"
-#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -539,7 +538,6 @@ Declaration* Parser::parseDeclaration() {
 		throw std::runtime_error("Expected declaration");
 	case kw_def: {
 		TokenName name = lookahead(2);
-		std::cout << to_string(name) << '\n';
 		if (name == tok_colon) {
 			return parseObjectDefinition();
 		}
